@@ -22,7 +22,10 @@ router.put('/users/:id', function(req,res,next){
 
 //delete a user from the db
 router.delete('/users/:id', function(req,res,next){
-  res.send({type: 'DELETE'});
+User.findByIdAndRemove({_id:req.params.id}).then(function(user){
+  res.send(user);
+});
+
 });
 
 
