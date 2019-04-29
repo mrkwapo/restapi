@@ -14,9 +14,8 @@ User.create(req.body).then(function(user) {
 }).catch(next);
 });
 
-
 //update  a user to the db
-router.put('/users/:id', function(req,res,next){
+router.put('/users/:id', function(req, res, next){
   res.send({type: 'PUT'});
 });
 
