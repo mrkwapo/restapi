@@ -15,17 +15,19 @@ User.create(req.body).then(function(user) {
 });
 
 //update  a user to the db
-router.put('/users/:id', function(req, res, next){
-  res.send({type: 'PUT'});
+router.put('/users/:id', function(req,res,next){
+  User.findByIdAndUpdate({_id:req.params.id}, req.body).then(function(){
+    User.findOne({_id:req.params.id}).then(function(user){
+      res.send(user);
+    });
+  }).catch(next);
 });
 
 //delete a user from the db
 router.delete('/users/:id', function(req,res,next){
-User.findByIdAndRemove({_id:req.params.id}).then(function(user){
-  res.send(user);
+  User.findByIdAndRemove({_id:req.params.id}).then(function(user){
+    res.send(user);
+  }).catch(next);
 });
-
-});
-
 
 module.exports= router;
